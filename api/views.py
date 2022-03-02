@@ -25,7 +25,7 @@ class ConvertCurrencies(generics.CreateAPIView):
         api = requests.get(url=url)
         api_json = api.json()
         try:
-            count = amount*float(api_json[title_dict]['bid'])
+            count = amount*float(api_json[title_dict]['ask'])
             data = {
                 'from': fr,
                 'to': to,
