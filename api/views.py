@@ -24,13 +24,14 @@ class ConvertCurrencies(generics.CreateAPIView):
         title_dict = fr + to
         api = requests.get(url=url)
         api_json = api.json()
-        count = amount*float(api_json[title_dict]['bid'])
-        data = {
-            'from': fr,
-            'to': to,
-            'amount': amount,
-            'result': "%.2f" % count,
-        }
-        
-        return Response(data)
-
+        try:
+            count = amount*float(api_json[title_dict]['bid'])
+            data = {
+                'from': fr,
+                'to': to,
+                'amount': amount,
+                'result': "%.2f" % count,
+            }
+            return Response(data)
+        except KeyError:
+            return Response(api_json)

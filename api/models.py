@@ -4,11 +4,16 @@ from django.forms import ChoiceField
 
 
 class CoinsAvailable(models.Model):
+    """
+    API request pattern template
+    """
     COINS_CHOICES = [
         ('EUR', 'Euro'),
-        ('USD', 'Dolar'),
+        ('USD', 'Dólar'),
         ('BRL', 'Real'),
-        ('GBP', 'Libra')
+        ('GBP', 'Libra'),
+        ('BTC', 'Bitcoin'),
+        ('ETH', 'Ethereum')
     ]
 
     from_coins = models.CharField(max_length=10, choices=COINS_CHOICES, null=True, blank=True)
@@ -16,5 +21,5 @@ class CoinsAvailable(models.Model):
     amount = models.FloatField()
 
     def __str__(self):
-        return f'{self.from_coins}--{self.to_coins}--{self.amount}'
+        return self.id
 
